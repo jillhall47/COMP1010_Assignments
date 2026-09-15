@@ -1,5 +1,5 @@
 # Assignment written by Jillian Hall
-# uID: U1503415
+# uID: REPLACE_WITH_YOUR_UID
 #
 # Assignment 2 - Turtle Graphics
 
@@ -59,94 +59,131 @@ for i in range(1, 25):
 spiral.hideturtle()
 
 # d) Your own picture
-# Drawing a simple house with a sun in the lower-left empty region
-house = turtle.Turtle()
-house.speed("fastest")
-house.pensize(2)
+# Drawing an elephant in the lower-left empty region
+elephant = turtle.Turtle()
+elephant.speed("fastest")
+elephant.pensize(2)
 
-# Sun
-house.penup()
-house.goto(-280, -20)
-house.pendown()
-house.color("orange")
-house.fillcolor("yellow")
-house.begin_fill()
-house.circle(25)
-house.end_fill()
-# Sun rays
-house.color("orange")
-for angle in range(0, 360, 45):
-    house.penup()
-    house.goto(-280, 5)
-    house.setheading(angle)
-    house.forward(30)
-    house.pendown()
-    house.forward(15)
+# Body
+elephant.penup()
+elephant.goto(-300, -200)
+elephant.setheading(0)
+elephant.pendown()
+elephant.color("dimgray")
+elephant.fillcolor("gray")
+elephant.begin_fill()
+elephant.circle(45)
+elephant.end_fill()
 
-# House body
-house.penup()
-house.goto(-320, -200)
-house.setheading(0)
-house.pendown()
-house.color("brown")
-house.fillcolor("tan")
-house.begin_fill()
-for _ in range(4):
-    house.forward(100)
-    house.left(90)
-house.end_fill()
+# Head
+elephant.penup()
+elephant.goto(-240, -165)
+elephant.pendown()
+elephant.color("dimgray")
+elephant.fillcolor("darkgray")
+elephant.begin_fill()
+elephant.circle(30)
+elephant.end_fill()
 
-# Roof
-house.penup()
-house.goto(-320, -100)
-house.pendown()
-house.color("darkred")
-house.fillcolor("red")
-house.begin_fill()
-house.goto(-270, -40)
-house.goto(-220, -100)
-house.goto(-320, -100)
-house.end_fill()
+# Ear (behind look — large oval-ish flap)
+elephant.penup()
+elephant.goto(-255, -130)
+elephant.setheading(90)
+elephant.pendown()
+elephant.color("dimgray")
+elephant.fillcolor("slategray")
+elephant.begin_fill()
+elephant.circle(28, 180)
+elephant.left(90)
+elephant.forward(56)
+elephant.end_fill()
 
-# Door
-house.penup()
-house.goto(-285, -200)
-house.setheading(0)
-house.pendown()
-house.color("saddlebrown")
-house.fillcolor("sienna")
-house.begin_fill()
-house.forward(30)
-house.left(90)
-house.forward(45)
-house.left(90)
-house.forward(30)
-house.left(90)
-house.forward(45)
-house.end_fill()
+# Inner ear
+elephant.penup()
+elephant.goto(-250, -125)
+elephant.setheading(90)
+elephant.pendown()
+elephant.color("rosybrown")
+elephant.fillcolor("pink")
+elephant.begin_fill()
+elephant.circle(16, 180)
+elephant.left(90)
+elephant.forward(32)
+elephant.end_fill()
 
-# Window
-house.penup()
-house.goto(-255, -145)
-house.setheading(0)
-house.pendown()
-house.color("navy")
-house.fillcolor("skyblue")
-house.begin_fill()
-for _ in range(4):
-    house.forward(28)
-    house.left(90)
-house.end_fill()
-# Window panes
-house.penup()
-house.goto(-255, -131)
-house.pendown()
-house.goto(-227, -131)
-house.penup()
-house.goto(-241, -145)
-house.pendown()
-house.goto(-241, -117)
+# Trunk — pen travels with lifts between segments for a curve
+elephant.penup()
+elephant.goto(-210, -145)
+elephant.setheading(-20)
+elephant.pendown()
+elephant.color("dimgray")
+elephant.pensize(6)
+for _ in range(6):
+    elephant.forward(10)
+    elephant.right(18)
+elephant.pensize(2)
 
-house.hideturtle()
+# Eye
+elephant.penup()
+elephant.goto(-225, -125)
+elephant.pendown()
+elephant.color("black")
+elephant.fillcolor("black")
+elephant.begin_fill()
+elephant.circle(4)
+elephant.end_fill()
+
+# Eye highlight
+elephant.penup()
+elephant.goto(-224, -123)
+elephant.pendown()
+elephant.color("white")
+elephant.fillcolor("white")
+elephant.begin_fill()
+elephant.circle(1.5)
+elephant.end_fill()
+
+# Tusk
+elephant.penup()
+elephant.goto(-215, -155)
+elephant.setheading(-40)
+elephant.pendown()
+elephant.color("khaki")
+elephant.pensize(3)
+elephant.forward(18)
+elephant.pensize(2)
+
+# Four legs (pen up between each)
+leg_positions = [(-320, -200), (-295, -200), (-275, -200), (-250, -200)]
+for x, y in leg_positions:
+    elephant.penup()
+    elephant.goto(x, y)
+    elephant.setheading(270)
+    elephant.pendown()
+    elephant.color("dimgray")
+    elephant.fillcolor("gray")
+    elephant.begin_fill()
+    elephant.forward(35)
+    elephant.left(90)
+    elephant.forward(14)
+    elephant.left(90)
+    elephant.forward(35)
+    elephant.left(90)
+    elephant.forward(14)
+    elephant.end_fill()
+
+# Tail
+elephant.penup()
+elephant.goto(-340, -155)
+elephant.setheading(160)
+elephant.pendown()
+elephant.color("dimgray")
+elephant.pensize(3)
+elephant.forward(20)
+elephant.right(40)
+elephant.forward(10)
+elephant.pensize(2)
+
+elephant.hideturtle()
 
 wn.exitonclick()
