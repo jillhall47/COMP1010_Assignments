@@ -1,16 +1,19 @@
+# A2 Turtle Assignment
+# Starter code by David Johnson
+# For COMP1010 University of Utah
 # Assignment written by Jillian Hall
 # uID: U1503415
-#
-# Assignment 2 - Turtle Graphics
 
+# Use the turtle module
 import turtle
 
-# Set up the screen
-wn = turtle.Screen()
-wn.bgcolor("white")
+# Create a screen to draw on
+window = turtle.Screen()
+window.bgcolor("white")
 
-# a) Draw a triangle
-# Make a turtle named triangle. The triangle must start and end at (0, 0).
+# A2 a)
+# Make a turtle named triangle and use that turtle to draw
+# a triangle with one corner at position x = 0 and y = 0
 triangle = turtle.Turtle()
 triangle.speed("fastest")
 triangle.color("red")
@@ -24,8 +27,12 @@ for _ in range(3):
     triangle.right(120)
 triangle.hideturtle()
 
-# b) Draw a zig-zag
-# Make a turtle named zigzag. Blue. Start (-100, 100). Loop with 8 peaks.
+# A2 b)
+# Make a turtle named zigzag and use that turtle to draw
+# a blue zigzag shape starting at position x = -100 and y = 100.
+# See the assignment for an example picture. You must use a
+# loop to repeat the pattern for 8 peaks.
+# The turtle should not leave any other lines except the zig zag.
 zigzag = turtle.Turtle()
 zigzag.speed("fastest")
 zigzag.color("blue")
@@ -33,7 +40,6 @@ zigzag.pensize(2)
 zigzag.penup()
 zigzag.goto(-100, 100)
 zigzag.pendown()
-# Loop draws 8 peaks (each peak is left, forward, right, forward, left)
 for i in range(8):
     zigzag.left(60)
     zigzag.forward(40)
@@ -42,8 +48,12 @@ for i in range(8):
     zigzag.left(60)
 zigzag.hideturtle()
 
-# c) Draw a square green spiral
-# Make a turtle named spiral. Green. Start (0, -100). Loop with growing length.
+# A2 c)
+# Make a turtle named spiral and use that turtle to draw
+# a green square spiral starting at position x = 0 and y = -100.
+# You must use a loop to form the spiral. As a hint, the length of
+# each part of the spiral gets longer. Use the loop counter variable
+# and some math to make a growing length as the loop repeats.
 spiral = turtle.Turtle()
 spiral.speed("fastest")
 spiral.color("green")
@@ -51,15 +61,15 @@ spiral.pensize(2)
 spiral.penup()
 spiral.goto(0, -100)
 spiral.pendown()
-# Loop grows the side length each time (square spiral)
-length = 5
 for i in range(25):
-    spiral.forward(length)
+    spiral.forward((i + 1) * 5)
     spiral.left(90)
-    length = length + 5
 spiral.hideturtle()
 
-# d) Your own picture
+# A2 d)
+# Add a new turtle. Draw a nice picture of your own design.
+# There should be different colors and sections that require
+# the turtle pen to go up and then back down to draw it.
 # Drawing a ski mountain scene (peaks, snow, trees, and a lift)
 mountain = turtle.Turtle()
 mountain.speed("fastest")
@@ -127,7 +137,6 @@ for tx, ty, th in [(-320, -220, 45), (-290, -150, 40), (-265, -70, 35)]:
     mountain.color("saddlebrown")
     mountain.pensize(3)
     mountain.forward(th)
-    # Crossbar
     mountain.left(90)
     mountain.forward(8)
     mountain.backward(16)
@@ -148,6 +157,7 @@ for _ in range(2):
     mountain.forward(10)
     mountain.right(90)
 mountain.end_fill()
+
 # Hanger from cable
 mountain.penup()
 mountain.goto(-288, -110)
@@ -159,7 +169,6 @@ mountain.forward(10)
 # Pine trees at the base — pen up between trees
 tree_spots = [(-350, -220), (-335, -220), (-175, -220), (-160, -220), (-145, -220)]
 for tx, ty in tree_spots:
-    # Trunk
     mountain.penup()
     mountain.goto(tx, ty)
     mountain.setheading(90)
@@ -174,7 +183,6 @@ for tx, ty in tree_spots:
     mountain.right(90)
     mountain.forward(6)
     mountain.end_fill()
-    # Needles (stacked triangles)
     mountain.color("darkgreen", "forestgreen")
     for level, size in enumerate((18, 14, 10)):
         mountain.penup()
@@ -199,5 +207,5 @@ mountain.end_fill()
 mountain.hideturtle()
 
 # Keep window open when run locally; skip on autograder mocks
-if hasattr(wn, "exitonclick"):
-    wn.exitonclick()
+if hasattr(window, "exitonclick"):
+    window.exitonclick()
