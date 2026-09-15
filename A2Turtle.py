@@ -4,6 +4,7 @@
 # Assignment 2 - Turtle Graphics
 
 import turtle
+import math
 
 # Set up the screen
 wn = turtle.Screen()
@@ -59,130 +60,144 @@ for i in range(1, 25):
 spiral.hideturtle()
 
 # d) Your own picture
-# Drawing an elephant in the lower-left empty region
+# Drawing a side-view elephant in the lower-left empty region
 elephant = turtle.Turtle()
 elephant.speed("fastest")
 elephant.pensize(2)
 
-# Body
-elephant.penup()
-elephant.goto(-300, -200)
-elephant.setheading(0)
-elephant.pendown()
-elephant.color("dimgray")
-elephant.fillcolor("gray")
-elephant.begin_fill()
-elephant.circle(45)
-elephant.end_fill()
+
+def filled_ellipse(t, cx, cy, rx, ry, outline, fill):
+    """Draw a filled ellipse centered at (cx, cy)."""
+    t.penup()
+    t.goto(cx + rx, cy)
+    t.pendown()
+    t.color(outline, fill)
+    t.begin_fill()
+    for deg in range(0, 361, 2):
+        rad = math.radians(deg)
+        t.goto(cx + rx * math.cos(rad), cy + ry * math.sin(rad))
+    t.end_fill()
+
+
+# Legs first (drawn under the body) — pen up between each leg
+leg_data = [
+    (-330, -195, 16, 48),  # back left
+    (-305, -195, 16, 48),  # back right
+    (-255, -195, 16, 48),  # front left
+    (-230, -195, 16, 48),  # front right
+]
+for lx, ly, lw, lh in leg_data:
+    elephant.penup()
+    elephant.goto(lx, ly)
+    elephant.setheading(0)
+    elephant.pendown()
+    elephant.color("dimgray", "gray")
+    elephant.begin_fill()
+    for _ in range(2):
+        elephant.forward(lw)
+        elephant.right(90)
+        elephant.forward(lh)
+        elephant.right(90)
+    elephant.end_fill()
+    # Foot pad
+    elephant.penup()
+    elephant.goto(lx + lw / 2, ly - lh)
+    elephant.pendown()
+    elephant.color("dimgray", "slategray")
+    elephant.begin_fill()
+    elephant.setheading(0)
+    elephant.circle(7)
+    elephant.end_fill()
+
+# Body (horizontal oval)
+filled_ellipse(elephant, -280, -145, 70, 48, "dimgray", "gray")
+
+# Big ear (behind the head)
+filled_ellipse(elephant, -255, -115, 38, 48, "dimgray", "darkgray")
+# Inner ear
+filled_ellipse(elephant, -250, -115, 22, 30, "rosybrown", "lightpink")
 
 # Head
-elephant.penup()
-elephant.goto(-240, -165)
-elephant.pendown()
-elephant.color("dimgray")
-elephant.fillcolor("darkgray")
-elephant.begin_fill()
-elephant.circle(30)
-elephant.end_fill()
+filled_ellipse(elephant, -215, -130, 36, 34, "dimgray", "darkgray")
 
-# Ear (behind look — large oval-ish flap)
+# Trunk — thick filled curve curling under
 elephant.penup()
-elephant.goto(-255, -130)
-elephant.setheading(90)
+elephant.goto(-185, -145)
 elephant.pendown()
-elephant.color("dimgray")
-elephant.fillcolor("slategray")
+elephant.color("dimgray", "gray")
+elephant.pensize(1)
 elephant.begin_fill()
-elephant.circle(28, 180)
+elephant.setheading(-55)
+# Outer edge of trunk
+for i in range(14):
+    elephant.forward(7)
+    elephant.right(9)
+# Tip and back up the inner edge
 elephant.left(90)
-elephant.forward(56)
-elephant.end_fill()
-
-# Inner ear
-elephant.penup()
-elephant.goto(-250, -125)
-elephant.setheading(90)
-elephant.pendown()
-elephant.color("rosybrown")
-elephant.fillcolor("pink")
-elephant.begin_fill()
-elephant.circle(16, 180)
+elephant.forward(14)
 elephant.left(90)
-elephant.forward(32)
+for i in range(14):
+    elephant.forward(6)
+    elephant.left(9)
 elephant.end_fill()
-
-# Trunk — pen travels with lifts between segments for a curve
-elephant.penup()
-elephant.goto(-210, -145)
-elephant.setheading(-20)
-elephant.pendown()
-elephant.color("dimgray")
-elephant.pensize(6)
-for _ in range(6):
-    elephant.forward(10)
-    elephant.right(18)
 elephant.pensize(2)
+
+# Tusks (cream colored) — pen up between them
+for heading, start in ((-50, (-195, -150)), (-70, (-200, -155))):
+    elephant.penup()
+    elephant.goto(start)
+    elephant.setheading(heading)
+    elephant.pendown()
+    elephant.color("khaki", "ivory")
+    elephant.begin_fill()
+    elephant.pensize(1)
+    elephant.forward(22)
+    elephant.right(25)
+    elephant.forward(6)
+    elephant.right(140)
+    elephant.forward(26)
+    elephant.end_fill()
+    elephant.pensize(2)
 
 # Eye
 elephant.penup()
-elephant.goto(-225, -125)
+elephant.goto(-205, -118)
 elephant.pendown()
-elephant.color("black")
-elephant.fillcolor("black")
+elephant.color("black", "white")
 elephant.begin_fill()
-elephant.circle(4)
+elephant.circle(6)
+elephant.end_fill()
+elephant.penup()
+elephant.goto(-203, -116)
+elephant.pendown()
+elephant.color("black", "black")
+elephant.begin_fill()
+elephant.circle(3)
 elephant.end_fill()
 
-# Eye highlight
+# Tail with tuft — pen up to start, then draw
 elephant.penup()
-elephant.goto(-224, -123)
-elephant.pendown()
-elephant.color("white")
-elephant.fillcolor("white")
-elephant.begin_fill()
-elephant.circle(1.5)
-elephant.end_fill()
-
-# Tusk
-elephant.penup()
-elephant.goto(-215, -155)
-elephant.setheading(-40)
-elephant.pendown()
-elephant.color("khaki")
-elephant.pensize(3)
-elephant.forward(18)
-elephant.pensize(2)
-
-# Four legs (pen up between each)
-leg_positions = [(-320, -200), (-295, -200), (-275, -200), (-250, -200)]
-for x, y in leg_positions:
-    elephant.penup()
-    elephant.goto(x, y)
-    elephant.setheading(270)
-    elephant.pendown()
-    elephant.color("dimgray")
-    elephant.fillcolor("gray")
-    elephant.begin_fill()
-    elephant.forward(35)
-    elephant.left(90)
-    elephant.forward(14)
-    elephant.left(90)
-    elephant.forward(35)
-    elephant.left(90)
-    elephant.forward(14)
-    elephant.end_fill()
-
-# Tail
-elephant.penup()
-elephant.goto(-340, -155)
-elephant.setheading(160)
+elephant.goto(-348, -140)
+elephant.setheading(200)
 elephant.pendown()
 elephant.color("dimgray")
 elephant.pensize(3)
-elephant.forward(20)
-elephant.right(40)
-elephant.forward(10)
+elephant.forward(22)
+elephant.right(25)
+elephant.forward(12)
+# Tuft
 elephant.pensize(2)
+for angle in (-40, 0, 40):
+    elephant.penup()
+    elephant.forward(0)
+    tip = elephant.position()
+    heading = elephant.heading()
+    elephant.setheading(heading + angle)
+    elephant.pendown()
+    elephant.forward(10)
+    elephant.penup()
+    elephant.goto(tip)
+    elephant.setheading(heading)
 
 elephant.hideturtle()
 
