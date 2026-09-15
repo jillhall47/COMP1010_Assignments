@@ -1,5 +1,5 @@
 # Assignment written by Jillian Hall
-# uID: REPLACE_WITH_YOUR_UID
+# uID: U1503415
 #
 # Assignment 2 - Turtle Graphics
 
@@ -32,13 +32,14 @@ zigzag.color("blue")
 zigzag.pensize(2)
 zigzag.penup()
 zigzag.goto(-100, 100)
-zigzag.setheading(60)
 zigzag.pendown()
+# Loop draws 8 peaks (each peak is left, forward, right, forward, left)
 for i in range(8):
-    zigzag.forward(35)
+    zigzag.left(60)
+    zigzag.forward(40)
     zigzag.right(120)
-    zigzag.forward(35)
-    zigzag.left(120)
+    zigzag.forward(40)
+    zigzag.left(60)
 zigzag.hideturtle()
 
 # c) Draw a square green spiral
@@ -49,11 +50,13 @@ spiral.color("green")
 spiral.pensize(2)
 spiral.penup()
 spiral.goto(0, -100)
-spiral.setheading(0)
 spiral.pendown()
-for i in range(1, 25):
-    spiral.forward(i * 4)
+# Loop grows the side length each time (square spiral)
+length = 5
+for i in range(25):
+    spiral.forward(length)
     spiral.left(90)
+    length = length + 5
 spiral.hideturtle()
 
 # d) Your own picture
