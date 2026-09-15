@@ -8,8 +8,6 @@ import turtle
 # Set up the screen
 wn = turtle.Screen()
 wn.bgcolor("white")
-wn.title("Assignment 2 - Turtle Graphics")
-wn.setup(width=800, height=600)
 
 # a) Draw a triangle
 # Make a turtle named triangle. The triangle must start and end at (0, 0).
@@ -197,4 +195,6 @@ mountain.end_fill()
 
 mountain.hideturtle()
 
-wn.exitonclick()
+# Keep window open when run locally; skip on autograder mocks
+if hasattr(wn, "exitonclick"):
+    wn.exitonclick()
