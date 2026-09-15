@@ -4,7 +4,6 @@
 # Assignment 2 - Turtle Graphics
 
 import turtle
-import math
 
 # Set up the screen
 wn = turtle.Screen()
@@ -60,145 +59,172 @@ for i in range(1, 25):
 spiral.hideturtle()
 
 # d) Your own picture
-# Drawing a side-view elephant in the lower-left empty region
-elephant = turtle.Turtle()
-elephant.speed("fastest")
-elephant.pensize(2)
+# Drawing a ski mountain scene (peaks, snow, ski run, trees, and a lift)
+mountain = turtle.Turtle()
+mountain.speed("fastest")
+mountain.pensize(2)
 
+# Back mountain peak
+mountain.penup()
+mountain.goto(-360, -220)
+mountain.pendown()
+mountain.color("steelblue", "slategray")
+mountain.begin_fill()
+mountain.goto(-280, -40)
+mountain.goto(-200, -220)
+mountain.goto(-360, -220)
+mountain.end_fill()
 
-def filled_ellipse(t, cx, cy, rx, ry, outline, fill):
-    """Draw a filled ellipse centered at (cx, cy)."""
-    t.penup()
-    t.goto(cx + rx, cy)
-    t.pendown()
-    t.color(outline, fill)
-    t.begin_fill()
-    for deg in range(0, 361, 2):
-        rad = math.radians(deg)
-        t.goto(cx + rx * math.cos(rad), cy + ry * math.sin(rad))
-    t.end_fill()
+# Front mountain peak (taller)
+mountain.penup()
+mountain.goto(-320, -220)
+mountain.pendown()
+mountain.color("dimgray", "gray")
+mountain.begin_fill()
+mountain.goto(-250, -10)
+mountain.goto(-150, -220)
+mountain.goto(-320, -220)
+mountain.end_fill()
 
+# Snow cap on front peak
+mountain.penup()
+mountain.goto(-278, -70)
+mountain.pendown()
+mountain.color("lightgray", "white")
+mountain.begin_fill()
+mountain.goto(-250, -10)
+mountain.goto(-215, -70)
+mountain.goto(-278, -70)
+mountain.end_fill()
 
-# Legs first (drawn under the body) — pen up between each leg
-leg_data = [
-    (-330, -195, 16, 48),  # back left
-    (-305, -195, 16, 48),  # back right
-    (-255, -195, 16, 48),  # front left
-    (-230, -195, 16, 48),  # front right
-]
-for lx, ly, lw, lh in leg_data:
-    elephant.penup()
-    elephant.goto(lx, ly)
-    elephant.setheading(0)
-    elephant.pendown()
-    elephant.color("dimgray", "gray")
-    elephant.begin_fill()
-    for _ in range(2):
-        elephant.forward(lw)
-        elephant.right(90)
-        elephant.forward(lh)
-        elephant.right(90)
-    elephant.end_fill()
-    # Foot pad
-    elephant.penup()
-    elephant.goto(lx + lw / 2, ly - lh)
-    elephant.pendown()
-    elephant.color("dimgray", "slategray")
-    elephant.begin_fill()
-    elephant.setheading(0)
-    elephant.circle(7)
-    elephant.end_fill()
+# Snow cap on back peak
+mountain.penup()
+mountain.goto(-310, -90)
+mountain.pendown()
+mountain.color("lightgray", "white")
+mountain.begin_fill()
+mountain.goto(-280, -40)
+mountain.goto(-250, -90)
+mountain.goto(-310, -90)
+mountain.end_fill()
 
-# Body (horizontal oval)
-filled_ellipse(elephant, -280, -145, 70, 48, "dimgray", "gray")
+# Blue ski run down the front face
+mountain.penup()
+mountain.goto(-250, -25)
+mountain.pendown()
+mountain.color("deepskyblue")
+mountain.pensize(4)
+mountain.setheading(-70)
+mountain.forward(40)
+mountain.right(25)
+mountain.forward(35)
+mountain.left(30)
+mountain.forward(45)
+mountain.right(20)
+mountain.forward(50)
+mountain.pensize(2)
 
-# Big ear (behind the head)
-filled_ellipse(elephant, -255, -115, 38, 48, "dimgray", "darkgray")
-# Inner ear
-filled_ellipse(elephant, -250, -115, 22, 30, "rosybrown", "lightpink")
+# Second ski run (lighter trail)
+mountain.penup()
+mountain.goto(-235, -30)
+mountain.pendown()
+mountain.color("skyblue")
+mountain.pensize(3)
+mountain.setheading(-55)
+mountain.forward(50)
+mountain.left(20)
+mountain.forward(60)
+mountain.right(15)
+mountain.forward(55)
+mountain.pensize(2)
 
-# Head
-filled_ellipse(elephant, -215, -130, 36, 34, "dimgray", "darkgray")
+# Ski lift cable
+mountain.penup()
+mountain.goto(-330, -200)
+mountain.pendown()
+mountain.color("black")
+mountain.pensize(1)
+mountain.goto(-260, -30)
+mountain.pensize(2)
 
-# Trunk — thick filled curve curling under
-elephant.penup()
-elephant.goto(-185, -145)
-elephant.pendown()
-elephant.color("dimgray", "gray")
-elephant.pensize(1)
-elephant.begin_fill()
-elephant.setheading(-55)
-# Outer edge of trunk
-for i in range(14):
-    elephant.forward(7)
-    elephant.right(9)
-# Tip and back up the inner edge
-elephant.left(90)
-elephant.forward(14)
-elephant.left(90)
-for i in range(14):
-    elephant.forward(6)
-    elephant.left(9)
-elephant.end_fill()
-elephant.pensize(2)
+# Lift towers — pen up between each
+for tx, ty, th in [(-320, -220, 45), (-290, -150, 40), (-265, -70, 35)]:
+    mountain.penup()
+    mountain.goto(tx, ty)
+    mountain.setheading(90)
+    mountain.pendown()
+    mountain.color("saddlebrown")
+    mountain.pensize(3)
+    mountain.forward(th)
+    # Crossbar
+    mountain.left(90)
+    mountain.forward(8)
+    mountain.backward(16)
+    mountain.forward(8)
+    mountain.right(90)
+    mountain.pensize(2)
 
-# Tusks (cream colored) — pen up between them
-for heading, start in ((-50, (-195, -150)), (-70, (-200, -155))):
-    elephant.penup()
-    elephant.goto(start)
-    elephant.setheading(heading)
-    elephant.pendown()
-    elephant.color("khaki", "ivory")
-    elephant.begin_fill()
-    elephant.pensize(1)
-    elephant.forward(22)
-    elephant.right(25)
-    elephant.forward(6)
-    elephant.right(140)
-    elephant.forward(26)
-    elephant.end_fill()
-    elephant.pensize(2)
+# Chair on the cable
+mountain.penup()
+mountain.goto(-295, -120)
+mountain.pendown()
+mountain.color("red", "tomato")
+mountain.begin_fill()
+mountain.setheading(0)
+for _ in range(2):
+    mountain.forward(14)
+    mountain.right(90)
+    mountain.forward(10)
+    mountain.right(90)
+mountain.end_fill()
+# Hanger from cable
+mountain.penup()
+mountain.goto(-288, -110)
+mountain.pendown()
+mountain.color("black")
+mountain.setheading(270)
+mountain.forward(10)
 
-# Eye
-elephant.penup()
-elephant.goto(-205, -118)
-elephant.pendown()
-elephant.color("black", "white")
-elephant.begin_fill()
-elephant.circle(6)
-elephant.end_fill()
-elephant.penup()
-elephant.goto(-203, -116)
-elephant.pendown()
-elephant.color("black", "black")
-elephant.begin_fill()
-elephant.circle(3)
-elephant.end_fill()
+# Pine trees at the base — pen up between trees
+tree_spots = [(-350, -220), (-335, -220), (-175, -220), (-160, -220), (-145, -220)]
+for tx, ty in tree_spots:
+    # Trunk
+    mountain.penup()
+    mountain.goto(tx, ty)
+    mountain.setheading(90)
+    mountain.pendown()
+    mountain.color("saddlebrown", "sienna")
+    mountain.begin_fill()
+    mountain.forward(12)
+    mountain.right(90)
+    mountain.forward(6)
+    mountain.right(90)
+    mountain.forward(12)
+    mountain.right(90)
+    mountain.forward(6)
+    mountain.end_fill()
+    # Needles (stacked triangles)
+    mountain.color("darkgreen", "forestgreen")
+    for level, size in enumerate((18, 14, 10)):
+        mountain.penup()
+        mountain.goto(tx - size / 2 + 3, ty + 10 + level * 10)
+        mountain.setheading(0)
+        mountain.pendown()
+        mountain.begin_fill()
+        mountain.goto(tx + 3, ty + 28 + level * 10)
+        mountain.goto(tx + size / 2 + 3, ty + 10 + level * 10)
+        mountain.goto(tx - size / 2 + 3, ty + 10 + level * 10)
+        mountain.end_fill()
 
-# Tail with tuft — pen up to start, then draw
-elephant.penup()
-elephant.goto(-348, -140)
-elephant.setheading(200)
-elephant.pendown()
-elephant.color("dimgray")
-elephant.pensize(3)
-elephant.forward(22)
-elephant.right(25)
-elephant.forward(12)
-# Tuft
-elephant.pensize(2)
-for angle in (-40, 0, 40):
-    elephant.penup()
-    elephant.forward(0)
-    tip = elephant.position()
-    heading = elephant.heading()
-    elephant.setheading(heading + angle)
-    elephant.pendown()
-    elephant.forward(10)
-    elephant.penup()
-    elephant.goto(tip)
-    elephant.setheading(heading)
+# Sun in the upper-left of the scene
+mountain.penup()
+mountain.goto(-355, -5)
+mountain.pendown()
+mountain.color("orange", "yellow")
+mountain.begin_fill()
+mountain.circle(16)
+mountain.end_fill()
 
-elephant.hideturtle()
+mountain.hideturtle()
 
 wn.exitonclick()
